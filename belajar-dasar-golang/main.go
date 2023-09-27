@@ -56,5 +56,15 @@ func main(){
 	})
 	fmt.Println(isAdmin)
 
+	fmt.Println(helpers.Fibonancy(5))
+	fmt.Println(helpers.Closure())
+	helpers.RunApplication()
+
+	// panic
+	helpers.PanicApplication(false)
+	
+	// recovery
+	helpers.RunApp(true)
+	fmt.Println("Tes dapat diesekusi")
 
 }
