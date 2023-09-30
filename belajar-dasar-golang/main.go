@@ -104,5 +104,53 @@ func main(){
         fmt.Println(hasil)
 	}
 
+	// type assertion
+	/*
+	digunakan untuk interface kosong
+	harus yakin jika data yang dikembalikan berpa data yang sama
+	jika berbeda maka akan panic
+	*/
+	random := helpers.Random()
+	fmt.Println(random.(string)) // harus sama
+
+	switch value := random.(type) {
+		case string:
+			fmt.Println("string", value)
+		case int:
+			fmt.Println("int", value)
+		default:
+			fmt.Println("Unknown", value)
+	}
+
+	// pointer
+	orang1 := helpers.Address{
+		Kota: "Pekalongan",
+		Provinsi: "Jawa Tengah",
+	}
+	orang2 := &orang1
+	orang2.Kota = "Kendal" // orang1 juga berubah
+
+	orang3 := &orang1
+	*orang3 = helpers.Address{
+		Kota: "Jogja",
+		Provinsi: "Jawa timur",
+	}
+
+	fmt.Println(orang1)
+	fmt.Println(orang2)
+	fmt.Println(orang3)
+	
+	// pointer in function
+	// contoh data aslinya.
+	user1 := helpers.Akun{
+		Username: "user1",
+		Password: "WeekPassword",
+	}
+
+	helpers.ChangePasswordNoPointer(user1) // tidak meruubah data aslinya
+	fmt.Println(user1) // WeekPassword
+
+	helpers.ChangePassword(&user1) // merubah data aslinya
+	fmt.Println(user1) // SecurePassword
 
 }
