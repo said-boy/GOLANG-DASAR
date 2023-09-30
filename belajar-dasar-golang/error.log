@@ -1,3 +1,6 @@
 "error" => "keterangan"
 
 (no value) used as value => sudah melakkan fmt.Println() dan memasukkannya lagi kedalam fmt.Println() 
+Variabel redeclared in this block => nama variabel tersebut sudah pernah digunakan pada package ini.
+
+

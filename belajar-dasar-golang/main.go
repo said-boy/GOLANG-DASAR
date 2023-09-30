@@ -67,4 +67,42 @@ func main(){
 	helpers.RunApp(true)
 	fmt.Println("Tes dapat diesekusi")
 
+	// struct
+	fmt.Println(helpers.SetCustomer())
+	//struct function
+	people := helpers.SetCustomer()
+	fmt.Println(people.SayHi("Pelanggan"))
+
+	// Geng (Interface)
+	lancelot := helpers.Person{
+		Name: "Lancelot",
+		Role: "Assassin",
+		Blood: 100,
+		Attack: 200,
+	}
+	
+	ruby := helpers.Person{
+		Name: "Ruby",
+		Role: "Tank",
+		Blood: 100,
+		Attack: 200,
+	}
+	helpers.PrintStrengthAndPunch(lancelot)
+	helpers.PrintStrengthAndPunch(ruby)
+
+	// interface kosong
+	fmt.Println(helpers.Message("halo","apa","kabar",1,true))
+
+	// nil
+	fmt.Println(helpers.PersonNil) // slice nil
+
+	// interface error
+	hasil, err := helpers.Pembagian(10,0)
+	if err != nil { // tidak ada error
+        fmt.Println(err)
+	} else {
+        fmt.Println(hasil)
+	}
+
+
 }
