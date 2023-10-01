@@ -174,4 +174,25 @@ func main(){
 	fmt.Println("User : ", *User)
 	fmt.Println("Password : ", *Password)
 
+	// strings
+	message := "    Please Subscribe    "
+	message2 := &message
+	message = helpers.DeleteSpaceInFrontAndBack(&message)
+	fmt.Println(message)
+	fmt.Println(*message2)
+
+	// parse string to Bool strconv
+	boolean, err := helpers.StringToBool("0")
+	if err == nil {
+        fmt.Println(boolean)
+    } else {
+        fmt.Println(err.Error())
+    }
+
+	number := helpers.IntToString(100)
+	fmt.Println(number)
+
+	fmt.Println(helpers.Round)
+	fmt.Println(helpers.Floor)
+
 }
