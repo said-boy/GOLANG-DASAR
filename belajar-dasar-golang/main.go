@@ -130,15 +130,15 @@ func main(){
 	orang2 := &orang1
 	orang2.Kota = "Kendal" // orang1 juga berubah
 
-	orang3 := &orang1
-	*orang3 = helpers.Address{
-		Kota: "Jogja",
-		Provinsi: "Jawa timur",
-	}
+	// orang3 := &orang1
+	// *orang3 = helpers.Address{
+	// 	Kota: "Jogja",
+	// 	Provinsi: "Jawa timur",
+	// }
 
 	fmt.Println(orang1)
 	fmt.Println(orang2)
-	fmt.Println(orang3)
+	// fmt.Println(orang3)
 	
 	// pointer in function
 	// contoh data aslinya.
@@ -146,11 +146,32 @@ func main(){
 		Username: "user1",
 		Password: "WeekPassword",
 	}
-
+	
 	helpers.ChangePasswordNoPointer(user1) // tidak meruubah data aslinya
 	fmt.Println(user1) // WeekPassword
 
 	helpers.ChangePassword(&user1) // merubah data aslinya
 	fmt.Println(user1) // SecurePassword
+	
+	user2 := &user1
+	user2.Username = "user2"
+
+	fmt.Println(user1)
+	fmt.Println(*user2)
+	
+	// package os
+	hostname, err := helpers.PrintHostname()
+	if err == nil {
+        fmt.Println("Hostname: ", hostname)
+    } else {
+		fmt.Println(err.Error())
+	}
+
+	// flag
+	Host, User, Password := helpers.DataConnectionDatabase()
+
+	fmt.Println("Host : ", *Host)
+	fmt.Println("User : ", *User)
+	fmt.Println("Password : ", *Password)
 
 }

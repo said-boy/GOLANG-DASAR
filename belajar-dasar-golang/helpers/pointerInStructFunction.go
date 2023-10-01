@@ -4,7 +4,7 @@ type Akun struct {
 	Username, Password string
 }
 
-// untuk dapat merubah aslinya, gunakan pointer
+// untuk dapat merubah data aslinya, gunakan pointer
 func ChangePassword(user *Akun){
 	user.Password = "SecurePassword"
 }
