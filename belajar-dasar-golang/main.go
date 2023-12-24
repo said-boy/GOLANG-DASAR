@@ -2,14 +2,15 @@ package main
 
 import (
 	"belajar-dasar-golang/helpers"
+	"belajar-dasar-golang/myinterface"
 	"fmt"
 )
 
-func startFunction(){
+func startFunction() {
 	fmt.Println("Belajar Golang function internal")
 }
 
-func main(){
+func main() {
 	fmt.Println(helpers.SayHello())
 	startFunction()
 	helpers.Nama()
@@ -29,7 +30,7 @@ func main(){
 	helpers.Break()
 	helpers.FuncParameter("Boy", 20)
 
-	arr := [3]string{"a","b","c",}
+	arr := [3]string{"a", "b", "c"}
 	helpers.ArrayParameter(arr)
 
 	fmt.Println(helpers.ReturnValue())
@@ -37,8 +38,8 @@ func main(){
 	fmt.Println(first_name, last_name)
 	fmt.Println(helpers.ReturnNameValue())
 
-	fmt.Println(helpers.Variadic(10,10,10))
-	data := []int{10,10,10}
+	fmt.Println(helpers.Variadic(10, 10, 10))
+	data := []int{10, 10, 10}
 	// jika datanya sudah ada tambahkkan ... dibelakangnya
 	fmt.Println(helpers.VariadicWithData(data...))
 
@@ -62,7 +63,7 @@ func main(){
 
 	// panic
 	helpers.PanicApplication(false)
-	
+
 	// recovery
 	helpers.RunApp(true)
 	fmt.Println("Tes dapat diesekusi")
@@ -75,56 +76,56 @@ func main(){
 
 	// Geng (Interface)
 	lancelot := helpers.Person{
-		Name: "Lancelot",
-		Role: "Assassin",
-		Blood: 100,
+		Name:   "Lancelot",
+		Role:   "Assassin",
+		Blood:  100,
 		Attack: 200,
 	}
-	
+
 	ruby := helpers.Person{
-		Name: "Ruby",
-		Role: "Tank",
-		Blood: 100,
+		Name:   "Ruby",
+		Role:   "Tank",
+		Blood:  100,
 		Attack: 200,
 	}
 	helpers.PrintStrengthAndPunch(lancelot)
 	helpers.PrintStrengthAndPunch(ruby)
 
 	// interface kosong
-	fmt.Println(helpers.Message("halo","apa","kabar",1,true))
+	fmt.Println(helpers.Message("halo", "apa", "kabar", 1, true))
 
 	// nil
 	fmt.Println(helpers.PersonNil) // slice nil
 
 	// interface error
-	hasil, err := helpers.Pembagian(10,0)
+	hasil, err := helpers.Pembagian(10, 0)
 	if err != nil { // tidak ada error
-        fmt.Println(err)
+		fmt.Println(err)
 	} else {
-        fmt.Println(hasil)
+		fmt.Println(hasil)
 	}
 
 	// type assertion
 	/*
-	digunakan untuk interface kosong
-	harus yakin jika data yang dikembalikan berpa data yang sama
-	jika berbeda maka akan panic
+		digunakan untuk interface kosong
+		harus yakin jika data yang dikembalikan berpa data yang sama
+		jika berbeda maka akan panic
 	*/
 	random := helpers.Random()
 	fmt.Println(random.(string)) // harus sama
 
 	switch value := random.(type) {
-		case string:
-			fmt.Println("string", value)
-		case int:
-			fmt.Println("int", value)
-		default:
-			fmt.Println("Unknown", value)
+	case string:
+		fmt.Println("string", value)
+	case int:
+		fmt.Println("int", value)
+	default:
+		fmt.Println("Unknown", value)
 	}
 
 	// pointer
 	orang1 := helpers.Address{
-		Kota: "Pekalongan",
+		Kota:     "Pekalongan",
 		Provinsi: "Jawa Tengah",
 	}
 	orang2 := &orang1
@@ -139,31 +140,31 @@ func main(){
 	fmt.Println(orang1)
 	fmt.Println(orang2)
 	// fmt.Println(orang3)
-	
+
 	// pointer in function
 	// contoh data aslinya.
 	user1 := helpers.Akun{
 		Username: "user1",
 		Password: "WeekPassword",
 	}
-	
+
 	helpers.ChangePasswordNoPointer(user1) // tidak meruubah data aslinya
-	fmt.Println(user1) // WeekPassword
+	fmt.Println(user1)                     // WeekPassword
 
 	helpers.ChangePassword(&user1) // merubah data aslinya
-	fmt.Println(user1) // SecurePassword
-	
+	fmt.Println(user1)             // SecurePassword
+
 	user2 := &user1
 	user2.Username = "user2"
 
 	fmt.Println(user1)
 	fmt.Println(*user2)
-	
+
 	// package os
 	hostname, err := helpers.PrintHostname()
 	if err == nil {
-        fmt.Println("Hostname: ", hostname)
-    } else {
+		fmt.Println("Hostname: ", hostname)
+	} else {
 		fmt.Println(err.Error())
 	}
 
@@ -184,15 +185,27 @@ func main(){
 	// parse string to Bool strconv
 	boolean, err := helpers.StringToBool("0")
 	if err == nil {
-        fmt.Println(boolean)
-    } else {
-        fmt.Println(err.Error())
-    }
+		fmt.Println(boolean)
+	} else {
+		fmt.Println(err.Error())
+	}
 
 	number := helpers.IntToString(100)
 	fmt.Println(number)
 
 	fmt.Println(helpers.Round)
 	fmt.Println(helpers.Floor)
+
+	// memanggil function dari interfacenya. (sesuai dengan golang)
+	var Hero myinterface.IHero = &myinterface.Hero{}
+	fmt.Println(Hero.Run(30))
+
+	var Enemy myinterface.IHero = &myinterface.Enemy{}
+	fmt.Println(Enemy.Run(30))
+
+	// memanggil function dari structnya. (meningkatkan kecepatan)
+	var Hero1 myinterface.Hero = myinterface.Hero{Name: "Said"}
+	fmt.Println(Hero1.PrintName())
+	fmt.Println(Hero1.Run(20))
 
 }
